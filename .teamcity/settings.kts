@@ -50,6 +50,11 @@ object Build : BuildType({
 
     steps {
         maven {
+            name = "Make test"
+
+            conditions {
+                doesNotContain("teamcity.build.branch", "master")
+            }
             goals = "clean test"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
