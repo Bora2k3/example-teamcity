@@ -59,7 +59,11 @@ object Build : BuildType({
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
         maven {
-            name = "New build step"
+            name = "Make package"
+
+            conditions {
+                contains("teamcity.build.branch", "master")
+            }
             goals = "clean test"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
